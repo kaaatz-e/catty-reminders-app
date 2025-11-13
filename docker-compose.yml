@@ -1,6 +1,6 @@
 services:
   app:
-    image: ghcr.io/kaaatz-e-e/catty-reminders:latest
+    image: ghcr.io/kaaatz-e/catty-reminders:latest
     ports:
       - "8181:8181"
     depends_on:
