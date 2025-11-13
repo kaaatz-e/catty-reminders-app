@@ -1,21 +1,22 @@
 services:
-  web:
-    image: ghcr.io/kaaatz-e/catty-reminders-app/catty-reminders:multicontainers
+  app:
+    image: ghcr.io/kaaatz-e-e/catty-reminders:latest
     ports:
       - "8181:8181"
-    volumes:
-      - ./config.json:/app/config.json
     depends_on:
       - db
+    volumes:
+      - ./config.json:/catty-reminders-app/config.json:ro
+    restart: unless-stopped
 
   db:
-    image: mariadb:10.11
+    image: mariadb:11
     environment:
       MYSQL_ROOT_PASSWORD: mypass
       MYSQL_DATABASE: catty_reminders
     volumes:
-      - db_data:/var/lib/mysql
+      - mysql_data:/var/lib/mysql
     restart: unless-stopped
 
 volumes:
-  db_data:
+  mysql_data:
